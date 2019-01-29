@@ -9,7 +9,7 @@
 import UIKit
 
 class TuDuViewController: UITableViewController {
-    let itemArray = ["Find Me", "Buy Food", "Watch a movie"]
+    var itemArray = ["Find Me", "Buy Food", "Watch a movie"]
     
     
     override func viewDidLoad() {
@@ -43,5 +43,35 @@ class TuDuViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
 
     }
+
+
+//MARK- Add New Items
+
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Add New TuDu Item", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+//            What will happen once user clicks the Add Item button on UIAlert
+            
+            self.itemArray.append(textField.text!)
+            
+            self.tableView.reloadData()
+            
+        }
+        
+        alert.addTextField { (alertTextFeild) in alertTextFeild.placeholder = "Create new item"
+            textField = alertTextFeild
+            
+        }
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+    }
+
+
 }
 
